@@ -11,6 +11,9 @@
 		F37347332198C02600E4F6BB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37347322198C02600E4F6BB /* ViewController.swift */; };
 		F37347352198C02800E4F6BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F37347342198C02800E4F6BB /* Assets.xcassets */; };
 		F37347382198C02800E4F6BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F37347362198C02800E4F6BB /* Main.storyboard */; };
+		F3849B2D21A995DB003122CF /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3849B2C21A995DB003122CF /* CommonFunctions.swift */; };
+		F3849B3221A9B267003122CF /* SHA1.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3849B3121A9B267003122CF /* SHA1.swift */; };
+		F3849B3421A9C3A8003122CF /* DSAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3849B3321A9C3A8003122CF /* DSAViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +24,9 @@
 		F37347372198C02800E4F6BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F37347392198C02800E4F6BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F373473A2198C02800E4F6BB /* Digital_Signature.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Digital_Signature.entitlements; sourceTree = "<group>"; };
+		F3849B2C21A995DB003122CF /* CommonFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
+		F3849B3121A9B267003122CF /* SHA1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA1.swift; sourceTree = "<group>"; };
+		F3849B3321A9C3A8003122CF /* DSAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSAViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,13 +60,32 @@
 			isa = PBXGroup;
 			children = (
 				F37347302198C02600E4F6BB /* AppDelegate.swift */,
-				F37347322198C02600E4F6BB /* ViewController.swift */,
 				F37347342198C02800E4F6BB /* Assets.xcassets */,
 				F37347362198C02800E4F6BB /* Main.storyboard */,
+				F3849B3521A9C3AD003122CF /* View Controllers */,
+				F3849B2E21A995DF003122CF /* Algorithms */,
 				F37347392198C02800E4F6BB /* Info.plist */,
 				F373473A2198C02800E4F6BB /* Digital_Signature.entitlements */,
 			);
 			path = Digital_Signature;
+			sourceTree = "<group>";
+		};
+		F3849B2E21A995DF003122CF /* Algorithms */ = {
+			isa = PBXGroup;
+			children = (
+				F3849B3121A9B267003122CF /* SHA1.swift */,
+				F3849B2C21A995DB003122CF /* CommonFunctions.swift */,
+			);
+			path = Algorithms;
+			sourceTree = "<group>";
+		};
+		F3849B3521A9C3AD003122CF /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F37347322198C02600E4F6BB /* ViewController.swift */,
+				F3849B3321A9C3A8003122CF /* DSAViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,7 +158,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3849B2D21A995DB003122CF /* CommonFunctions.swift in Sources */,
 				F37347332198C02600E4F6BB /* ViewController.swift in Sources */,
+				F3849B3421A9C3A8003122CF /* DSAViewController.swift in Sources */,
+				F3849B3221A9B267003122CF /* SHA1.swift in Sources */,
 				F37347312198C02600E4F6BB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
