@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F313D7D621AA9729009DE87C /* Swift-Big-Number-Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = F313D7D521AA9729009DE87C /* Swift-Big-Number-Core.swift */; };
 		F37347312198C02600E4F6BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37347302198C02600E4F6BB /* AppDelegate.swift */; };
 		F37347332198C02600E4F6BB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37347322198C02600E4F6BB /* ViewController.swift */; };
 		F37347352198C02800E4F6BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F37347342198C02800E4F6BB /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F313D7D521AA9729009DE87C /* Swift-Big-Number-Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Swift-Big-Number-Core.swift"; sourceTree = "<group>"; };
 		F373472D2198C02600E4F6BB /* Digital_Signature.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Digital_Signature.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F37347302198C02600E4F6BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F37347322198C02600E4F6BB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				F3849B3121A9B267003122CF /* SHA1.swift */,
+				F313D7D521AA9729009DE87C /* Swift-Big-Number-Core.swift */,
 				F3849B2C21A995DB003122CF /* CommonFunctions.swift */,
 			);
 			path = Algorithms;
@@ -158,6 +161,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F313D7D621AA9729009DE87C /* Swift-Big-Number-Core.swift in Sources */,
 				F3849B2D21A995DB003122CF /* CommonFunctions.swift in Sources */,
 				F37347332198C02600E4F6BB /* ViewController.swift in Sources */,
 				F3849B3421A9C3A8003122CF /* DSAViewController.swift in Sources */,

@@ -30,7 +30,7 @@ class DSAViewController: ViewController {
     var y: Int = 0
     
     var r: Int = 0
-    var hashStr: String = ""
+    var hashVal: BInt = 0
     var s: Int = 0
    
     var w: Int = 0
@@ -47,14 +47,20 @@ class DSAViewController: ViewController {
         switch tag {
         case 0:
             
-            guard (openedFile?.count ?? 0) > 0 else {
+            guard (openedFile?.count ?? -1) > -1 else {
                 dialogError(question: "Error!", text: "Please, open a file first.")
                 return false
             }
-            hashStr = SHA1.hexString(from: openedFile!) ?? ""
+            var hashStr = SHA1.hexString(from: openedFile!) ?? ""
+            hashStr = hashStr.replacingOccurrences(of: " ", with: "").lowercased()
             guard hashStr != "" else {
                 dialogError(question: "Error!", text: "Hash?")
                 return false
+            }
+            hashVal = BInt(hashStr, radix: 16) ?? 0
+            hashField.stringValue = ""
+            for element in hashVal.limbs {
+                hashField.stringValue = String(element) + hashField.stringValue
             }
             
             guard (Int(qField.stringValue) != nil) && (Int(qField.stringValue)!.isPrime) else {
@@ -98,7 +104,10 @@ class DSAViewController: ViewController {
             k = Int(kField.stringValue)!
             
             r = fastexp(a: g, z: k, n: p) % q
-            s = fastexp(a: k, z: q-2, n: q) * mod(stringHash: hashStr, plus: x*r, divisedBy: q)
+            let sExp = fastexp(a: k, z: q-2, n: q)
+            let tempHash = hashVal+x*r
+            let sHash = tempHash % BInt(q)
+            s = sExp * Int(sHash)
             
             guard (r != 0) && (s != 0) else {
                 dialogError(question: "Error!", text: "Enter other k!")
@@ -107,15 +116,22 @@ class DSAViewController: ViewController {
     
         case 1:
             
-            guard (openedFile?.count ?? 0) > 0 else {
+            guard (openedFile?.count ?? -1) > -1 else {
                 dialogError(question: "Error!", text: "Please, open a file.")
                 return false
             }
-            hashStr = SHA1.hexString(from: openedFile!) ?? ""
+            var hashStr = SHA1.hexString(from: openedFile!) ?? ""
+            hashStr = hashStr.replacingOccurrences(of: " ", with: "").lowercased()
             guard hashStr != "" else {
                 dialogError(question: "Error!", text: "Hash?")
                 return false
             }
+            hashVal = BInt(hashStr, radix: 16) ?? 0
+            hashField.stringValue = ""
+            for element in hashVal.limbs {
+                hashField.stringValue = String(element) + hashField.stringValue
+            }
+            
             guard openedSignature != nil else {
                 dialogError(question: "Error!", text: "Please, open a signature.")
                 return false
@@ -143,7 +159,7 @@ class DSAViewController: ViewController {
             gField.stringValue = String(g)
             
             w = fastexp(a: s, z: q-2, n: q)
-            u1 = mod(stringHash: hashStr, multiply: w, divisedBy: q)
+            u1 = Int((hashVal * w) % q)
             u2 = (r * w) % q
             v = (((g ^^ u1) * (y ^^ u2)) % p) % q
             
@@ -155,14 +171,13 @@ class DSAViewController: ViewController {
     }
     
     @IBAction func openAction(_ sender: Any) {
-        
+        openTextFile()
     }
     
     @IBAction func createAction(_ sender: Any) {
-        
-    }
-    
-    @IBAction func openSignature(_ sender: Any) {
+        if mainStreamSuccessfull(tag: 0) {
+            print(r,s)
+        }
     }
     
     @IBAction func checkAction(_ sender: Any) {

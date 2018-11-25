@@ -32,12 +32,3 @@ func fastexp(a: Int, z: Int, n: Int) -> Int {
     }
     return x
 }
-
-// Mod of big number
-func mod(stringHash str: String, plus: Int, divisedBy d: Int) -> Int {
-    return 4
-}
-
-func mod(stringHash str: String, multiply: Int, divisedBy d: Int) -> Int {
-    return 4
-}

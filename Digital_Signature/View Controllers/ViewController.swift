@@ -41,6 +41,17 @@ class ViewController: NSViewController {
     var openedFile: String?
     var openedSignature: (Int, Int)?
     
+    func openTextFile() {
+        let fileURL = URL(fileURLWithPath: browseFile())
+        if fileURL != URL(fileURLWithPath: "") {
+            do {
+                openedFile  = try String(contentsOf: fileURL)
+            } catch {
+                dialogError(question: "Failed reading from URL: \(fileURL)", text: "Error: " + error.localizedDescription)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
