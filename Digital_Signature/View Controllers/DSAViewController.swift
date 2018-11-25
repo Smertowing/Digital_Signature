@@ -58,10 +58,7 @@ class DSAViewController: ViewController {
                 return false
             }
             hashVal = BInt(hashStr, radix: 16) ?? 0
-            hashField.stringValue = ""
-            for element in hashVal.limbs {
-                hashField.stringValue = String(element) + hashField.stringValue
-            }
+            hashField.stringValue = hashVal.description
             
             guard (Int(qField.stringValue) != nil) && (Int(qField.stringValue)!.isPrime) else {
                 dialogError(question: "Error!", text: "q is invalid number.")
@@ -127,10 +124,7 @@ class DSAViewController: ViewController {
                 return false
             }
             hashVal = BInt(hashStr, radix: 16) ?? 0
-            hashField.stringValue = ""
-            for element in hashVal.limbs {
-                hashField.stringValue = String(element) + hashField.stringValue
-            }
+            hashField.stringValue = "0x"+hashStr
             
             guard openedSignature != nil else {
                 dialogError(question: "Error!", text: "Please, open a signature.")
