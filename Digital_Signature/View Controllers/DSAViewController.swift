@@ -43,50 +43,50 @@ class DSAViewController: ViewController {
         // Do view setup here.
     }
     
-    func mainStreamSuccessfull(tag: Int) -> Bool {
+    func mainStreamSuccessfull(for text: String, tag: Int) -> Bool {
         switch tag {
         case 0:
             
-            guard (openedFile?.count ?? -1) > -1 else {
-                dialogError(question: "Error!", text: "Please, open a file first.")
+            guard text.count > -1 else {
+                dialogError(question: "Error!", text: "Please, open a file first.", type: .critical)
                 return false
             }
-            var hashStr = SHA1.hexString(from: openedFile!) ?? ""
+            var hashStr = SHA1.hexString(from: text) ?? ""
             hashStr = hashStr.replacingOccurrences(of: " ", with: "").lowercased()
             guard hashStr != "" else {
-                dialogError(question: "Error!", text: "Hash?")
+                dialogError(question: "Error!", text: "Hash?", type: .critical)
                 return false
             }
             hashVal = BInt(hashStr, radix: 16) ?? 0
             hashField.stringValue = hashVal.description
             
             guard (Int(qField.stringValue) != nil) && (Int(qField.stringValue)!.isPrime) else {
-                dialogError(question: "Error!", text: "q is invalid number.")
+                dialogError(question: "Error!", text: "q is invalid number.", type: .critical)
                 return false
             }
             q = Int(qField.stringValue)!
             
             guard (Int(pField.stringValue) != nil) && (Int(pField.stringValue)!.isPrime) && ((Int(pField.stringValue)!-1)%q == 0) else {
-                dialogError(question: "Error!", text: "p is invalid number.")
+                dialogError(question: "Error!", text: "p is invalid number.", type: .critical)
                 return false
             }
             p = Int(pField.stringValue)!
             
             guard (Int(hField.stringValue) != nil) && (Int(hField.stringValue)! >= 1) && (Int(hField.stringValue)! <= (p-1)) else {
-                dialogError(question: "Error!", text: "h is invalid number.")
+                dialogError(question: "Error!", text: "h is invalid number.", type: .critical)
                 return false
             }
             h = Int(hField.stringValue)!
             
             g = fastexp(a: h, z: (p-1)/q, n: p)
             guard g > 1 else {
-                dialogError(question: "Error!", text: "g <= 1.")
+                dialogError(question: "Error!", text: "g <= 1.", type: .critical)
                 return false
             }
             gField.stringValue = String(g)
             
             guard (Int(xField.stringValue) != nil) && (Int(xField.stringValue)! >= 0) && (Int(xField.stringValue)! <= q) else {
-                dialogError(question: "Error!", text: "x is invalid number.")
+                dialogError(question: "Error!", text: "x is invalid number.", type: .critical)
                 return false
             }
             x = Int(xField.stringValue)!
@@ -95,7 +95,7 @@ class DSAViewController: ViewController {
             yField.stringValue = String(y)
             
             guard (Int(kField.stringValue) != nil) && (Int(kField.stringValue)! >= 0) && (Int(kField.stringValue)! <= q) else {
-                dialogError(question: "Error!", text: "k is invalid number.")
+                dialogError(question: "Error!", text: "k is invalid number.", type: .critical)
                 return false
             }
             k = Int(kField.stringValue)!
@@ -107,47 +107,59 @@ class DSAViewController: ViewController {
             s = sExp * Int(sHash)
             
             guard (r != 0) && (s != 0) else {
-                dialogError(question: "Error!", text: "Enter other k!")
+                dialogError(question: "Error!", text: "Enter other k!", type: .critical)
                 return false
             }
     
         case 1:
             
-            guard (openedFile?.count ?? -1) > -1 else {
-                dialogError(question: "Error!", text: "Please, open a file.")
+            guard text.count > -1 else {
+                dialogError(question: "Error!", text: "Please, open a file.", type: .critical)
                 return false
             }
-            var hashStr = SHA1.hexString(from: openedFile!) ?? ""
+            var hashStr = SHA1.hexString(from: text) ?? ""
             hashStr = hashStr.replacingOccurrences(of: " ", with: "").lowercased()
             guard hashStr != "" else {
-                dialogError(question: "Error!", text: "Hash?")
+                dialogError(question: "Error!", text: "Hash?", type: .critical)
                 return false
             }
             hashVal = BInt(hashStr, radix: 16) ?? 0
-            hashField.stringValue = "0x"+hashStr
+            hashField.stringValue = hashVal.description
             
-            guard openedSignature != nil else {
-                dialogError(question: "Error!", text: "Please, open a signature.")
+            guard openedSignatureDSA != nil else {
+                dialogError(question: "Error!", text: "Please, open a signature.", type: .critical)
                 return false
             }
-            r = openedSignature!.0
-            s = openedSignature!.1
+            r = openedSignatureDSA!.0
+            s = openedSignatureDSA!.1
             
             guard (Int(qField.stringValue) != nil) && (Int(qField.stringValue)!.isPrime) else {
-                dialogError(question: "Error!", text: "q is invalid number.")
+                dialogError(question: "Error!", text: "q is invalid number.", type: .critical)
                 return false
             }
             q = Int(qField.stringValue)!
             
             guard (Int(pField.stringValue) != nil) && (Int(pField.stringValue)!.isPrime) && ((Int(pField.stringValue)!-1)%q == 0) else {
-                dialogError(question: "Error!", text: "p is invalid number.")
+                dialogError(question: "Error!", text: "p is invalid number.", type: .critical)
                 return false
             }
             p = Int(pField.stringValue)!
             
+            guard (Int(hField.stringValue) != nil) && (Int(hField.stringValue)! >= 1) && (Int(hField.stringValue)! <= (p-1)) else {
+                dialogError(question: "Error!", text: "h is invalid number.", type: .critical)
+                return false
+            }
+            h = Int(hField.stringValue)!
+            
+            guard (Int(yField.stringValue) != nil) && (Int(yField.stringValue)! > 0) else {
+                dialogError(question: "Error!", text: "y is invalid number.", type: .critical)
+                return false
+            }
+            y = Int(yField.stringValue)!
+            
             g = fastexp(a: h, z: (p-1)/q, n: p)
             guard g > 1 else {
-                dialogError(question: "Error!", text: "g <= 1.")
+                dialogError(question: "Error!", text: "g <= 1.", type: .critical)
                 return false
             }
             gField.stringValue = String(g)
@@ -155,7 +167,7 @@ class DSAViewController: ViewController {
             w = fastexp(a: s, z: q-2, n: q)
             u1 = Int((hashVal * w) % q)
             u2 = (r * w) % q
-            v = (((g ^^ u1) * (y ^^ u2)) % p) % q
+            v = Int((((BInt(g) ** u1) * (BInt(y) ** u2)) % p) % q)
             
         default:
             return false
@@ -163,19 +175,35 @@ class DSAViewController: ViewController {
         
         return true
     }
+
     
     @IBAction func openAction(_ sender: Any) {
         openTextFile()
     }
     
     @IBAction func createAction(_ sender: Any) {
-        if mainStreamSuccessfull(tag: 0) {
-            print(r,s)
+        if let openedText = openedFile {
+            if mainStreamSuccessfull(for: openedText, tag: 0) {
+                openedSignatureDSA = (r,s)
+                if let signedText = writeSignatureDSA() {
+                    saveTextFile(signedMessage: signedText)
+                }
+            }
         }
     }
     
     @IBAction func checkAction(_ sender: Any) {
-        
+        if let rawText = readSignatureDSA() {
+            if mainStreamSuccessfull(for: rawText, tag: 1) {
+                if v == r {
+                    dialogError(question: "Signature checked", text: "Result: Valid", type: .informational)
+                } else {
+                    dialogError(question: "Signature checked", text: "Result: Valid", type: .informational)
+                }
+            }
+        }
     }
+    
+   
     
 }

@@ -12,12 +12,6 @@ extension Int {
     var isPrime: Bool { return self > 1 && !(2 ..< self).contains { self % $0 == 0 } }
 }
 
-precedencegroup PowerPrecedence { higherThan: MultiplicationPrecedence }
-infix operator ^^ : PowerPrecedence
-func ^^ (radix: Int, power: Int) -> Int {
-    return Int(pow(Double(radix), Double(power)))
-}
-
 // Fast exponentiation algorithm
 func fastexp(a: Int, z: Int, n: Int) -> Int {
     var a1 = a, z1 = z
