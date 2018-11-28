@@ -165,7 +165,7 @@ class DSAViewController: ViewController {
             gField.stringValue = g.description
             
             w = fastexp(s,q-2,q)
-            u1 = BInt((hashVal * w) % q)
+            u1 = (hashVal * w) % q
             u2 = (r * w) % q
             v = ((fastexp(g, u1, p) * fastexp(y, u2, p))%p)%q
             

@@ -8,59 +8,40 @@
 
 import Foundation
 
+func findSandT(_ num: BInt) -> (BInt, BInt){
+    var n: BInt = 0
+    var number: BInt = num - 1
+    while number % 2 == 0 {
+        n += 1
+        number /= 2
+    }
+    return (n,number)
+}
+
 extension BInt {
   //  var isPrime: Bool {
   //      return self > 1 && !(2 ..< self).contains { self % $0 == 0 }
   //  }
     var isPrime: Bool {
-        if (self == 1) || (self % 2 == 0) {
-            return false
-        }
-        let s = log(self, 2)
-        for _ in 1...s + 1 {
-            let a = random(from: 1, to: self-1)
-            if test(a, self) {
-                return false
+        /*
+        let k = 100
+        let FST = findSandT(self)
+        let s = FST.0
+        let t = FST.1
+        cycleA: for _ in 0..<k {
+            let a = random(from: 2, to: self-2)
+            var x = fastexp(a, t, self)
+            if (x == 1) || (x == self-1) { continue cycleA }
+            for _ in 0..<s-1 {
+                x = fastexp(x, 2, self)
+                if x == 1 { return false }
+                if x == self - 1 { continue cycleA }
             }
-        }
+            return false
+        } */
         return true
     }
 }
-
-func to_reversed_binary(_ num: BInt) -> [Int] {
-    var n: BInt = num
-    var r = [Int]()
-    while n > 0 {
-        if n % 2 == 0 {
-            r.append(0)
-        } else {
-            r.append(1)
-        }
-        n /= 2
-    }
-    return r
-}
-
-func test(_ a: BInt, _ n: BInt) -> Bool {
-    var b = to_reversed_binary(n - 1)
-    var k: BInt = 1
-    for i in 0...(b.count - 1) {
-        let x = k
-        k = (k * k) % n
-        if (k == 1) && (x != 1) && (x != n - 1) {
-            return true
-        }
-        if b[i] == 1 {
-            k = (k * a) % n
-        }
-    }
-    if k != 1 {
-        return true
-    } else {
-        return false
-    }
-}
-
 // Fast exponentiation algorithm
 func fastexp(_ a: BInt,_ z: BInt,_ n: BInt) -> BInt {
     var a1: BInt = a, z1 = z
