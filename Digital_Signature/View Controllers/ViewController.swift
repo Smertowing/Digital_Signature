@@ -39,7 +39,7 @@ extension NSViewController {
 class ViewController: NSViewController {
     
     var openedFile: String?
-    var openedSignatureDSA: (Int, Int)?
+    var openedSignatureDSA: (BInt, BInt)?
     
     func openTextFile() {
         let fileURL = URL(fileURLWithPath: browseFile())
@@ -74,7 +74,7 @@ class ViewController: NSViewController {
                     firstKey.removeFirst()
                     secondKey.removeFirst()
                     
-                    if let first = Int(firstKey), let second = Int(secondKey) {
+                    if let first = BInt(String(firstKey)), let second = BInt(String(secondKey)) {
                         openedSignatureDSA = (first,second)
                     } else {
                         return nil

@@ -20,30 +20,30 @@ class DSAViewController: ViewController {
     @IBOutlet weak var yField: NSTextField!
     @IBOutlet weak var gField: NSTextField!
     
-    var q: Int = 0
-    var p: Int = 0
-    var h: Int = 0
-    var x: Int = 0
-    var k: Int = 0
+    var q: BInt = 0
+    var p: BInt = 0
+    var h: BInt = 0
+    var x: BInt = 0
+    var k: BInt = 0
     
-    var g: Int = 0
-    var y: Int = 0
+    var g: BInt = 0
+    var y: BInt = 0
     
-    var r: Int = 0
+    var r: BInt = 0
     var hashVal: BInt = 0
-    var s: Int = 0
+    var s: BInt = 0
    
-    var w: Int = 0
-    var u1: Int = 0
-    var u2: Int = 0
-    var v: Int = 0
+    var w: BInt = 0
+    var u1: BInt = 0
+    var u2: BInt = 0
+    var v: BInt = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
     }
     
-    func mainStreamSuccessfull(for text: String, tag: Int) -> Bool {
+    func mainStreamSuccessfull(for text: String, tag: BInt) -> Bool {
         switch tag {
         case 0:
             
@@ -60,51 +60,51 @@ class DSAViewController: ViewController {
             hashVal = BInt(hashStr, radix: 16) ?? 0
             hashField.stringValue = hashVal.description
             
-            guard (Int(qField.stringValue) != nil) && (Int(qField.stringValue)!.isPrime) else {
+            guard (BInt(qField.stringValue) != nil) && (BInt(qField.stringValue)!.isPrime) else {
                 dialogError(question: "Error!", text: "q is invalid number.", type: .critical)
                 return false
             }
-            q = Int(qField.stringValue)!
+            q = BInt(qField.stringValue)!
             
-            guard (Int(pField.stringValue) != nil) && (Int(pField.stringValue)!.isPrime) && ((Int(pField.stringValue)!-1)%q == 0) else {
+            guard (BInt(pField.stringValue) != nil) && (BInt(pField.stringValue)!.isPrime) && ((BInt(pField.stringValue)!-1)%q == 0) else {
                 dialogError(question: "Error!", text: "p is invalid number.", type: .critical)
                 return false
             }
-            p = Int(pField.stringValue)!
+            p = BInt(pField.stringValue)!
             
-            guard (Int(hField.stringValue) != nil) && (Int(hField.stringValue)! >= 1) && (Int(hField.stringValue)! <= (p-1)) else {
+            guard (BInt(hField.stringValue) != nil) && (BInt(hField.stringValue)! >= 1) && (BInt(hField.stringValue)! <= (p-1)) else {
                 dialogError(question: "Error!", text: "h is invalid number.", type: .critical)
                 return false
             }
-            h = Int(hField.stringValue)!
+            h = BInt(hField.stringValue)!
             
-            g = fastexp(a: h, z: (p-1)/q, n: p)
+            g = fastexp(h, (p-1)/q, p)
             guard g > 1 else {
                 dialogError(question: "Error!", text: "g <= 1.", type: .critical)
                 return false
             }
             gField.stringValue = String(g)
             
-            guard (Int(xField.stringValue) != nil) && (Int(xField.stringValue)! >= 0) && (Int(xField.stringValue)! <= q) else {
+            guard (BInt(xField.stringValue) != nil) && (BInt(xField.stringValue)! >= 0) && (BInt(xField.stringValue)! <= q) else {
                 dialogError(question: "Error!", text: "x is invalid number.", type: .critical)
                 return false
             }
-            x = Int(xField.stringValue)!
+            x = BInt(xField.stringValue)!
             
-            y = fastexp(a: g, z: x, n: p)
-            yField.stringValue = String(y)
+            y = fastexp(g, x, p)
+            yField.stringValue = y.description
             
-            guard (Int(kField.stringValue) != nil) && (Int(kField.stringValue)! >= 0) && (Int(kField.stringValue)! <= q) else {
+            guard (BInt(kField.stringValue) != nil) && (BInt(kField.stringValue)! >= 0) && (BInt(kField.stringValue)! <= q) else {
                 dialogError(question: "Error!", text: "k is invalid number.", type: .critical)
                 return false
             }
-            k = Int(kField.stringValue)!
+            k = BInt(kField.stringValue)!
             
-            r = fastexp(a: g, z: k, n: p) % q
-            let sExp = fastexp(a: k, z: q-2, n: q)
+            r = fastexp(g, k, p) % q
+            let sExp = fastexp(k, q-2, q)
             let tempHash = hashVal+x*r
-            let sHash = tempHash % BInt(q)
-            s = sExp * Int(sHash)
+            let sHash = tempHash % q
+            s = sExp * sHash
             
             guard (r != 0) && (s != 0) else {
                 dialogError(question: "Error!", text: "Enter other k!", type: .critical)
@@ -133,41 +133,41 @@ class DSAViewController: ViewController {
             r = openedSignatureDSA!.0
             s = openedSignatureDSA!.1
             
-            guard (Int(qField.stringValue) != nil) && (Int(qField.stringValue)!.isPrime) else {
+            guard (BInt(qField.stringValue) != nil) && (BInt(qField.stringValue)!.isPrime) else {
                 dialogError(question: "Error!", text: "q is invalid number.", type: .critical)
                 return false
             }
-            q = Int(qField.stringValue)!
+            q = BInt(qField.stringValue)!
             
-            guard (Int(pField.stringValue) != nil) && (Int(pField.stringValue)!.isPrime) && ((Int(pField.stringValue)!-1)%q == 0) else {
+            guard (BInt(pField.stringValue) != nil) && (BInt(pField.stringValue)!.isPrime) && ((BInt(pField.stringValue)!-1)%q == 0) else {
                 dialogError(question: "Error!", text: "p is invalid number.", type: .critical)
                 return false
             }
-            p = Int(pField.stringValue)!
+            p = BInt(pField.stringValue)!
             
-            guard (Int(hField.stringValue) != nil) && (Int(hField.stringValue)! >= 1) && (Int(hField.stringValue)! <= (p-1)) else {
+            guard (BInt(hField.stringValue) != nil) && (BInt(hField.stringValue)! >= 1) && (BInt(hField.stringValue)! <= (p-1)) else {
                 dialogError(question: "Error!", text: "h is invalid number.", type: .critical)
                 return false
             }
-            h = Int(hField.stringValue)!
+            h = BInt(hField.stringValue)!
             
-            guard (Int(yField.stringValue) != nil) && (Int(yField.stringValue)! > 0) else {
+            guard (BInt(yField.stringValue) != nil) && (BInt(yField.stringValue)! > 0) else {
                 dialogError(question: "Error!", text: "y is invalid number.", type: .critical)
                 return false
             }
-            y = Int(yField.stringValue)!
+            y = BInt(yField.stringValue)!
             
-            g = fastexp(a: h, z: (p-1)/q, n: p)
+            g = fastexp(h, (p-1)/q, p)
             guard g > 1 else {
                 dialogError(question: "Error!", text: "g <= 1.", type: .critical)
                 return false
             }
-            gField.stringValue = String(g)
+            gField.stringValue = g.description
             
-            w = fastexp(a: s, z: q-2, n: q)
-            u1 = Int((hashVal * w) % q)
+            w = fastexp(s,q-2,q)
+            u1 = BInt((hashVal * w) % q)
             u2 = (r * w) % q
-            v = Int((((BInt(g) ** u1) * (BInt(y) ** u2)) % p) % q)
+            v = ((fastexp(g, u1, p) * fastexp(y, u2, p))%p)%q
             
         default:
             return false
