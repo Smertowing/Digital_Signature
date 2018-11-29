@@ -47,7 +47,7 @@ extension BInt {
 // test Ferma for prime numbers
 func ferma(_ x: BInt) -> Bool {
     if (x == 2) { return true }
-    for _ in 0..<20 {
+    for _ in 0..<100 {
         let a = random(from: 2, to: x-1)
         let kek = gcd(a, x)
         if kek != 1 {

@@ -17,6 +17,7 @@ class DSAViewController: ViewController {
     @IBOutlet weak var kField: NSTextField!
     
     @IBOutlet weak var hashField: NSTextField!
+    @IBOutlet weak var hashHexField: NSTextField!
     @IBOutlet weak var yField: NSTextField!
     @IBOutlet weak var gField: NSTextField!
     
@@ -58,6 +59,7 @@ class DSAViewController: ViewController {
                 return false
             }
             hashVal = BInt(hashStr, radix: 16) ?? 0
+            hashHexField.stringValue = hashStr
             hashField.stringValue = hashVal.description
             
             guard (BInt(qField.stringValue) != nil) && (BInt(qField.stringValue)!.isPrime) else {
@@ -123,6 +125,7 @@ class DSAViewController: ViewController {
                 return false
             }
             hashVal = BInt(hashStr, radix: 16) ?? 0
+            hashHexField.stringValue = hashStr
             hashField.stringValue = hashVal.description
             
             guard openedSignatureDSA != nil else {
