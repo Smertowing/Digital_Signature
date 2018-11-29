@@ -39,9 +39,27 @@ extension BInt {
             }
             return false
         } */
-        return true
+        
+        return ferma(self)
     }
 }
+
+// test Ferma for prime numbers
+func ferma(_ x: BInt) -> Bool {
+    if (x == 2) { return true }
+    for _ in 0..<20 {
+        let a = random(from: 2, to: x-1)
+        let kek = gcd(a, x)
+        if kek != 1 {
+            return false
+        }
+        if fastexp(a, x-1, x) != 1 {
+            return false
+        }
+    }
+    return true
+}
+
 // Fast exponentiation algorithm
 func fastexp(_ a: BInt,_ z: BInt,_ n: BInt) -> BInt {
     var a1: BInt = a, z1 = z
@@ -57,8 +75,16 @@ func fastexp(_ a: BInt,_ z: BInt,_ n: BInt) -> BInt {
     return x
 }
 
+func gcd(_ a: BInt, _ b: BInt) -> BInt {
+    if b==0 {
+        return a
+    } else {
+        return gcd(b, a%b)
+    }
+}
+
 func random(from x: BInt, to y: BInt) -> BInt {
-    return (BInt(Int.random(in: Int.min...Int.max)) * 912049124921421) % (y-x) + x
+    return (BInt(Int.random(in: 0...Int.max)) * 912049124921421) % (y-x) + x
 }
 
 func log(_ a: BInt, _ n: BInt) -> BInt {

@@ -83,7 +83,7 @@ class DSAViewController: ViewController {
                 dialogError(question: "Error!", text: "g <= 1.", type: .critical)
                 return false
             }
-            gField.stringValue = String(g)
+            gField.stringValue = g.description
             
             guard (BInt(xField.stringValue) != nil) && (BInt(xField.stringValue)! >= 0) && (BInt(xField.stringValue)! <= q) else {
                 dialogError(question: "Error!", text: "x is invalid number.", type: .critical)
@@ -102,9 +102,8 @@ class DSAViewController: ViewController {
             
             r = fastexp(g, k, p) % q
             let sExp = fastexp(k, q-2, q)
-            let tempHash = hashVal+x*r
-            let sHash = tempHash % q
-            s = sExp * sHash
+            let sHash = hashVal+x*r
+            s = (sExp * sHash) % q
             
             guard (r != 0) && (s != 0) else {
                 dialogError(question: "Error!", text: "Enter other k!", type: .critical)

@@ -92,7 +92,7 @@ class ViewController: NSViewController {
     
     func writeSignatureDSA() -> String? {
         if var tempString = openedFile, let tempSignature = openedSignatureDSA {
-            tempString.append("⚿"+String(tempSignature.0)+" "+String(tempSignature.1))
+            tempString.append("⚿"+tempSignature.0.description+" "+tempSignature.1.description)
             return tempString
         } else {
             return nil
