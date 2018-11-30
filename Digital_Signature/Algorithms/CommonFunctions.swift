@@ -46,8 +46,9 @@ extension BInt {
 
 // test Ferma for prime numbers
 func ferma(_ x: BInt) -> Bool {
-    if (x == 2) { return true }
-    for _ in 0..<100 {
+    if (x == 1) { return false}
+    if (x == 2) || (x == 1) { return true }
+    for _ in 0..<20 {
         let a = random(from: 2, to: x-1)
         let kek = gcd(a, x)
         if kek != 1 {
@@ -84,9 +85,6 @@ func gcd(_ a: BInt, _ b: BInt) -> BInt {
 }
 
 func random(from x: BInt, to y: BInt) -> BInt {
-    return (BInt(Int.random(in: 0...Int.max)) * 912049124921421) % (y-x) + x
+    return (BInt(Int.random(in: 0...Int.max)) * 555) % (y-x) + x
 }
 
-func log(_ a: BInt, _ n: BInt) -> BInt {
-    return 1000
-}

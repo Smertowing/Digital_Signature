@@ -62,13 +62,13 @@ class DSAViewController: ViewController {
             hashHexField.stringValue = hashStr
             hashField.stringValue = hashVal.description
             
-            guard (BInt(qField.stringValue) != nil) && (BInt(qField.stringValue)!.isPrime) else {
+            guard (BInt(qField.stringValue) != nil) && (BInt(qField.stringValue)! > BInt("73075081866545145910184241635814150982796627148", radix: 10)!) && (BInt(qField.stringValue)! < BInt("1461501637330902918203684832716283019655932542976", radix: 10)!) && (BInt(qField.stringValue)!.isPrime) else {
                 dialogError(question: "Error!", text: "q is invalid number.", type: .critical)
                 return false
             }
             q = BInt(qField.stringValue)!
             
-            guard (BInt(pField.stringValue) != nil) && (BInt(pField.stringValue)!.isPrime) && ((BInt(pField.stringValue)!-1)%q == 0) else {
+            guard (BInt(pField.stringValue) != nil) && ((BInt(pField.stringValue)!-1)%q == 0) && (BInt(pField.stringValue)!.isPrime) else {
                 dialogError(question: "Error!", text: "p is invalid number.", type: .critical)
                 return false
             }
