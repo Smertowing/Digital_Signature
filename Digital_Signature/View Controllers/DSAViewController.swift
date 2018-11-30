@@ -62,19 +62,19 @@ class DSAViewController: ViewController {
             hashHexField.stringValue = hashStr
             hashField.stringValue = hashVal.description
             
-            guard (BInt(qField.stringValue) != nil) && (BInt(qField.stringValue)! > BInt("73075081866545145910184241635814150982796627148", radix: 10)!) && (BInt(qField.stringValue)! < BInt("1461501637330902918203684832716283019655932542976", radix: 10)!) && (BInt(qField.stringValue)!.isPrime) else {
+            guard (BInt(qField.stringValue) != nil) && (BInt(qField.stringValue)!.bitWidth == 160) && (BInt(qField.stringValue)!.isPrime) else {
                 dialogError(question: "Error!", text: "q is invalid number.", type: .critical)
                 return false
             }
             q = BInt(qField.stringValue)!
             
-            guard (BInt(pField.stringValue) != nil) && ((BInt(pField.stringValue)!-1)%q == 0) && (BInt(pField.stringValue)!.isPrime) else {
+            guard (BInt(pField.stringValue) != nil) && ((BInt(pField.stringValue)!-1)%q == 0) && ((BInt(pField.stringValue))!.bitWidth <= 1024) && ((BInt(pField.stringValue))!.bitWidth >= 512) && (BInt(pField.stringValue)!.isPrime) else {
                 dialogError(question: "Error!", text: "p is invalid number.", type: .critical)
                 return false
             }
             p = BInt(pField.stringValue)!
             
-            guard (BInt(hField.stringValue) != nil) && (BInt(hField.stringValue)! >= 1) && (BInt(hField.stringValue)! <= (p-1)) else {
+            guard (BInt(hField.stringValue) != nil) && (BInt(hField.stringValue)! > 1) && (BInt(hField.stringValue)! < (p-1)) else {
                 dialogError(question: "Error!", text: "h is invalid number.", type: .critical)
                 return false
             }
@@ -82,12 +82,12 @@ class DSAViewController: ViewController {
             
             g = fastexp(h, (p-1)/q, p)
             guard g > 1 else {
-                dialogError(question: "Error!", text: "g <= 1.", type: .critical)
+                dialogError(question: "Error!", text: "g == 1.", type: .critical)
                 return false
             }
             gField.stringValue = g.description
             
-            guard (BInt(xField.stringValue) != nil) && (BInt(xField.stringValue)! >= 0) && (BInt(xField.stringValue)! <= q) else {
+            guard (BInt(xField.stringValue) != nil) && (BInt(xField.stringValue)! > 0) && (BInt(xField.stringValue)! < q) else {
                 dialogError(question: "Error!", text: "x is invalid number.", type: .critical)
                 return false
             }
@@ -96,7 +96,7 @@ class DSAViewController: ViewController {
             y = fastexp(g, x, p)
             yField.stringValue = y.description
             
-            guard (BInt(kField.stringValue) != nil) && (BInt(kField.stringValue)! >= 0) && (BInt(kField.stringValue)! <= q) else {
+            guard (BInt(kField.stringValue) != nil) && (BInt(kField.stringValue)! > 0) && (BInt(kField.stringValue)! < q) else {
                 dialogError(question: "Error!", text: "k is invalid number.", type: .critical)
                 return false
             }
@@ -135,19 +135,19 @@ class DSAViewController: ViewController {
             r = openedSignatureDSA!.0
             s = openedSignatureDSA!.1
             
-            guard (BInt(qField.stringValue) != nil) && (BInt(qField.stringValue)!.isPrime) else {
+            guard (BInt(qField.stringValue) != nil) && (BInt(qField.stringValue)!.bitWidth == 160) && (BInt(qField.stringValue)!.isPrime) else {
                 dialogError(question: "Error!", text: "q is invalid number.", type: .critical)
                 return false
             }
             q = BInt(qField.stringValue)!
             
-            guard (BInt(pField.stringValue) != nil) && (BInt(pField.stringValue)!.isPrime) && ((BInt(pField.stringValue)!-1)%q == 0) else {
+            guard (BInt(pField.stringValue) != nil) && ((BInt(pField.stringValue)!-1)%q == 0) && ((BInt(pField.stringValue))!.bitWidth <= 1024) && ((BInt(pField.stringValue))!.bitWidth >= 512) && (BInt(pField.stringValue)!.isPrime) else {
                 dialogError(question: "Error!", text: "p is invalid number.", type: .critical)
                 return false
             }
             p = BInt(pField.stringValue)!
             
-            guard (BInt(hField.stringValue) != nil) && (BInt(hField.stringValue)! >= 1) && (BInt(hField.stringValue)! <= (p-1)) else {
+            guard (BInt(hField.stringValue) != nil) && (BInt(hField.stringValue)! > 1) && (BInt(hField.stringValue)! < (p-1)) else {
                 dialogError(question: "Error!", text: "h is invalid number.", type: .critical)
                 return false
             }
@@ -200,7 +200,7 @@ class DSAViewController: ViewController {
                 if v == r {
                     dialogError(question: "Signature checked", text: "Result: Valid", type: .informational)
                 } else {
-                    dialogError(question: "Signature checked", text: "Result: Valid", type: .informational)
+                    dialogError(question: "Signature checked", text: "Result: Invalid", type: .informational)
                 }
             }
         }

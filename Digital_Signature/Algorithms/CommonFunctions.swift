@@ -23,24 +23,15 @@ extension BInt {
   //      return self > 1 && !(2 ..< self).contains { self % $0 == 0 }
   //  }
     var isPrime: Bool {
-        /*
-        let k = 100
-        let FST = findSandT(self)
-        let s = FST.0
-        let t = FST.1
-        cycleA: for _ in 0..<k {
-            let a = random(from: 2, to: self-2)
-            var x = fastexp(a, t, self)
-            if (x == 1) || (x == self-1) { continue cycleA }
-            for _ in 0..<s-1 {
-                x = fastexp(x, 2, self)
-                if x == 1 { return false }
-                if x == self - 1 { continue cycleA }
-            }
-            return false
-        } */
         
-        return ferma(self)
+        if (self == 1) || (self == 2) {
+            return true
+        }
+        if (self == 0) || (self % 2 == 0) {
+            return false
+        }
+        
+        return true
     }
 }
 
