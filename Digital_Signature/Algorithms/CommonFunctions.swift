@@ -30,7 +30,6 @@ extension BInt {
         if (self == 0) || (self % 2 == 0) {
             return false
         }
-        
         return true
     }
 }

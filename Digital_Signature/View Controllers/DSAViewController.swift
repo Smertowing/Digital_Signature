@@ -147,24 +147,17 @@ class DSAViewController: ViewController {
             }
             p = BInt(pField.stringValue)!
             
-            guard (BInt(hField.stringValue) != nil) && (BInt(hField.stringValue)! > 1) && (BInt(hField.stringValue)! < (p-1)) else {
-                dialogError(question: "Error!", text: "h is invalid number.", type: .critical)
-                return false
-            }
-            h = BInt(hField.stringValue)!
-            
             guard (BInt(yField.stringValue) != nil) && (BInt(yField.stringValue)! > 0) else {
                 dialogError(question: "Error!", text: "y is invalid number.", type: .critical)
                 return false
             }
             y = BInt(yField.stringValue)!
-            
-            g = fastexp(h, (p-1)/q, p)
-            guard g > 1 else {
+        
+            guard (BInt(gField.stringValue) != nil) && (BInt(gField.stringValue)! > 1) else {
                 dialogError(question: "Error!", text: "g <= 1.", type: .critical)
                 return false
             }
-            gField.stringValue = g.description
+            g = BInt(gField.stringValue)!
             
             w = fastexp(s,q-2,q)
             u1 = (hashVal * w) % q
