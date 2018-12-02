@@ -19,18 +19,14 @@ func findSandT(_ num: BInt) -> (BInt, BInt){
 }
 
 extension BInt {
-  //  var isPrime: Bool {
-  //      return self > 1 && !(2 ..< self).contains { self % $0 == 0 }
-  //  }
     var isPrime: Bool {
-        
         if (self == 1) || (self == 2) {
             return true
         }
         if (self == 0) || (self % 2 == 0) {
             return false
         }
-        return true
+        return ferma(self)
     }
 }
 

@@ -75,8 +75,8 @@
 		F3849B2E21A995DF003122CF /* Algorithms */ = {
 			isa = PBXGroup;
 			children = (
-				F3849B3121A9B267003122CF /* SHA1.swift */,
 				F3849B2C21A995DB003122CF /* CommonFunctions.swift */,
+				F3849B3121A9B267003122CF /* SHA1.swift */,
 				F313D7D521AA9729009DE87C /* Swift-Big-Number-Core.swift */,
 			);
 			path = Algorithms;

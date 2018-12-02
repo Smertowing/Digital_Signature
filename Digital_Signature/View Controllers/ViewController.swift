@@ -9,6 +9,7 @@
 import Cocoa
 
 extension NSViewController {
+    
     func browseFile() -> String {
         let browse = NSOpenPanel();
         browse.title                   = "Choose a file"
@@ -34,6 +35,7 @@ extension NSViewController {
         alert.addButton(withTitle: "Ok")
         alert.runModal()
     }
+    
 }
 
 class ViewController: NSViewController {
@@ -102,12 +104,6 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-    }
-
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
     }
 
 }

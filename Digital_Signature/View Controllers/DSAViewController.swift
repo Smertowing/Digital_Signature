@@ -47,7 +47,6 @@ class DSAViewController: ViewController {
     func mainStreamSuccessfull(for text: String, tag: BInt) -> Bool {
         switch tag {
         case 0:
-            
             guard text.count > -1 else {
                 dialogError(question: "Error!", text: "Please, open a file first.", type: .critical)
                 return false
@@ -113,7 +112,6 @@ class DSAViewController: ViewController {
             }
     
         case 1:
-            
             guard text.count > -1 else {
                 dialogError(question: "Error!", text: "Please, open a file.", type: .critical)
                 return false
@@ -167,7 +165,6 @@ class DSAViewController: ViewController {
         default:
             return false
         }
-        
         return true
     }
 
@@ -196,9 +193,9 @@ class DSAViewController: ViewController {
                     dialogError(question: "Signature checked", text: "Result: Invalid", type: .informational)
                 }
             }
+        } else {
+            dialogError(question: "Signature did not find", text: "Result: Invalid", type: .informational)
         }
     }
-    
-   
     
 }
